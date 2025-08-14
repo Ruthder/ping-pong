@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3 uid="uid://dq7smngmqa6kl"]
+
+[ext_resource type="Script" uid="uid://dm3rj2rvmqnbj" path="res://scripts/jugadorIzquierdo.gd" id="1_ibkli"]
+[ext_resource type="Script" uid="uid://danwckflsvpdo" path="res://scripts/jugadorDerecho.gd" id="2_cpr0p"]
+[ext_resource type="Script" uid="uid://b4seyx424uad5" path="res://scripts/bola.gd" id="2_qbsmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ve7bo"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ibkli"]
+size = Vector2(10, 668)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbsmt"]
+size = Vector2(10, 85)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ibkli"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MurroArriba" type="StaticBody2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="MurroArriba"]
+offset_left = -1.375
+offset_top = -10.5
+offset_right = 1154.62
+offset_bottom = 9.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MurroArriba"]
+position = Vector2(576, 0)
+shape = SubResource("RectangleShape2D_ve7bo")
+
+[node name="MuroAbajo" type="StaticBody2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="MuroAbajo"]
+offset_left = -0.5
+offset_top = 637.5
+offset_right = 1155.5
+offset_bottom = 657.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MuroAbajo"]
+position = Vector2(576, 648)
+shape = SubResource("RectangleShape2D_ve7bo")
+
+[node name="Decoracion" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decoracion"]
+position = Vector2(571, 324)
+shape = SubResource("RectangleShape2D_ibkli")
+
+[node name="ColorRect10" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 587.0
+offset_right = 576.0
+offset_bottom = 632.0
+
+[node name="ColorRect9" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 524.0
+offset_right = 576.0
+offset_bottom = 569.0
+
+[node name="ColorRect8" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 461.0
+offset_right = 576.0
+offset_bottom = 506.0
+
+[node name="ColorRect7" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 398.0
+offset_right = 576.0
+offset_bottom = 443.0
+
+[node name="ColorRect6" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 335.0
+offset_right = 576.0
+offset_bottom = 380.0
+
+[node name="ColorRect5" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 272.0
+offset_right = 576.0
+offset_bottom = 317.0
+
+[node name="ColorRect4" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 209.0
+offset_right = 576.0
+offset_bottom = 254.0
+
+[node name="ColorRect3" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 146.0
+offset_right = 576.0
+offset_bottom = 191.0
+
+[node name="ColorRect2" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 83.0
+offset_right = 576.0
+offset_bottom = 128.0
+
+[node name="ColorRect" type="ColorRect" parent="Decoracion"]
+offset_left = 566.0
+offset_top = 20.0
+offset_right = 576.0
+offset_bottom = 65.0
+
+[node name="ScoreDerecha" type="Label" parent="."]
+offset_left = 588.0
+offset_top = 23.0
+offset_right = 628.0
+offset_bottom = 93.0
+text = "0"
+
+[node name="ScoreIzquierda" type="Label" parent="."]
+offset_left = 514.0
+offset_top = 23.0
+offset_right = 554.0
+offset_bottom = 93.0
+text = "0"
+
+[node name="JugadorIzquierda" type="CharacterBody2D" parent="." groups=["Jugador"]]
+script = ExtResource("1_ibkli")
+
+[node name="ColorRect" type="ColorRect" parent="JugadorIzquierda"]
+offset_left = 13.0
+offset_top = 278.0
+offset_right = 23.0
+offset_bottom = 363.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JugadorIzquierda"]
+position = Vector2(18, 320.5)
+shape = SubResource("RectangleShape2D_qbsmt")
+
+[node name="JugadorDerecha" type="CharacterBody2D" parent="." groups=["Jugador"]]
+position = Vector2(1115, -1)
+script = ExtResource("2_cpr0p")
+
+[node name="ColorRect" type="ColorRect" parent="JugadorDerecha"]
+offset_left = 13.0
+offset_top = 278.0
+offset_right = 23.0
+offset_bottom = 363.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JugadorDerecha"]
+position = Vector2(18, 320.5)
+shape = SubResource("RectangleShape2D_qbsmt")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(572, 326)
+gravity_scale = 0.0
+script = ExtResource("2_qbsmt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_ibkli")
