@@ -13,11 +13,12 @@ size = Vector2(10, 668)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qbsmt"]
 size = Vector2(10, 85)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ibkli"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cpr0p"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="MurroArriba" type="StaticBody2D" parent="."]
+[node name="MurroArriba" type="StaticBody2D" parent="." groups=["paredes"]]
+disable_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="MurroArriba"]
 offset_left = -1.375
@@ -29,7 +30,8 @@ offset_bottom = 9.5
 position = Vector2(576, 0)
 shape = SubResource("RectangleShape2D_ve7bo")
 
-[node name="MuroAbajo" type="StaticBody2D" parent="."]
+[node name="MuroAbajo" type="StaticBody2D" parent="." groups=["paredes"]]
+disable_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="MuroAbajo"]
 offset_left = -0.5
@@ -150,8 +152,17 @@ shape = SubResource("RectangleShape2D_qbsmt")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(572, 326)
+mass = 0.001
 gravity_scale = 0.0
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("2_qbsmt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("CircleShape2D_ibkli")
+shape = SubResource("CircleShape2D_cpr0p")
+
+[connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
+[connection signal="body_exited" from="RigidBody2D" to="RigidBody2D" method="_on_body_exited"]
+[connection signal="body_shape_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_shape_entered"]
+[connection signal="body_shape_exited" from="RigidBody2D" to="RigidBody2D" method="_on_body_shape_exited"]
