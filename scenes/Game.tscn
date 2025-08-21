@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dq7smngmqa6kl"]
+[gd_scene load_steps=10 format=3 uid="uid://dq7smngmqa6kl"]
 
+[ext_resource type="Script" uid="uid://cf3ctprxp6oy2" path="res://scripts/game.gd" id="1_78awf"]
 [ext_resource type="Script" uid="uid://dm3rj2rvmqnbj" path="res://scripts/jugadorIzquierdo.gd" id="1_ibkli"]
 [ext_resource type="Script" uid="uid://danwckflsvpdo" path="res://scripts/jugadorDerecho.gd" id="2_cpr0p"]
 [ext_resource type="Script" uid="uid://b4seyx424uad5" path="res://scripts/bola.gd" id="2_qbsmt"]
@@ -15,7 +16,11 @@ size = Vector2(10, 85)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cpr0p"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpr0p"]
+size = Vector2(10, 668)
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_78awf")
 
 [node name="MurroArriba" type="StaticBody2D" parent="." groups=["paredes"]]
 disable_mode = 1
@@ -150,19 +155,36 @@ offset_bottom = 363.0
 position = Vector2(18, 320.5)
 shape = SubResource("RectangleShape2D_qbsmt")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Bola" type="RigidBody2D" parent="." groups=["Bola"]]
 position = Vector2(572, 326)
 mass = 0.001
 gravity_scale = 0.0
 freeze_mode = 1
 contact_monitor = true
-max_contacts_reported = 2
+max_contacts_reported = 4
 script = ExtResource("2_qbsmt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bola"]
 shape = SubResource("CircleShape2D_cpr0p")
 
-[connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
-[connection signal="body_exited" from="RigidBody2D" to="RigidBody2D" method="_on_body_exited"]
-[connection signal="body_shape_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_shape_entered"]
-[connection signal="body_shape_exited" from="RigidBody2D" to="RigidBody2D" method="_on_body_shape_exited"]
+[node name="ArcoDerecho" type="Area2D" parent="." groups=["Arco"]]
+position = Vector2(1162, 0)
+disable_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoDerecho"]
+position = Vector2(-5, 324)
+shape = SubResource("RectangleShape2D_cpr0p")
+
+[node name="ArcoIzquierdo" type="Area2D" parent="." groups=["Arco"]]
+position = Vector2(-2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoIzquierdo"]
+position = Vector2(-3, 323)
+shape = SubResource("RectangleShape2D_cpr0p")
+
+[connection signal="body_entered" from="Bola" to="Bola" method="_on_body_entered"]
+[connection signal="body_exited" from="Bola" to="Bola" method="_on_body_exited"]
+[connection signal="body_shape_entered" from="Bola" to="Bola" method="_on_body_shape_entered"]
+[connection signal="body_shape_exited" from="Bola" to="Bola" method="_on_body_shape_exited"]
+[connection signal="body_entered" from="ArcoDerecho" to="." method="_on_arco_derecho_body_entered"]
+[connection signal="body_entered" from="ArcoIzquierdo" to="." method="_on_arco_izquierdo_body_entered"]
